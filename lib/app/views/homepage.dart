@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restapi_with_provider/app/controllers/character_controller.dart';
+import 'package:restapi_with_provider/app/views/detailspage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -35,7 +36,14 @@ class HomePage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final character = contoller.character[index];
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailsPage(characters: character),
+                              ),
+                            );
+                          },
                           child: Card(
                             elevation: 0,
                             child: Padding(
@@ -60,6 +68,7 @@ class HomePage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  const SizedBox(width: 20),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -74,7 +83,7 @@ class HomePage extends StatelessWidget {
                                       const SizedBox(height: 8),
                                       Text(
                                         character.house.toString(),
-                                        style:const TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 13,
                                         ),
                                         maxLines: 2,
